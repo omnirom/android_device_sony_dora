@@ -12,24 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/sony/tone-common/PlatformConfig.mk
+# Bootanimation
+TARGET_BOOTANIMATION_SIZE := 1080x608
 
-TARGET_BOOTLOADER_BOARD_NAME := F8131
+# Inherit device parts
+$(call inherit-product, device/sony/dora/aosp_f8131.mk)
 
-# Platform
-PRODUCT_PLATFORM := tone
+# Override Product Name
+PRODUCT_NAME := omni_dora
+PRODUCT_MODEL := Xperia X Performance
 
-WIFI_BUS := PCIE
+# Assert
+TARGET_OTA_ASSERT_DEVICE := none
 
-# NFC
-NXP_CHIP_TYPE := PN547C2
-NXP_CHIP_TYPE_FW := PN547C2
+# Inherit rom parts
+$(call inherit-product, vendor/omni/config/gsm.mk)
 
-BOARD_KERNEL_CMDLINE += androidboot.hardware=dora
-
-# Recovery config
-BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_NUM="45"
-BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_MAJOR="259"
-BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_MINOR="13"
-
-#TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/clearpad/wakeup_gesture"
